@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Field Login (Vulnerable)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .demo-credentials {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .demo-credentials h4 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .sql-hint {
+            margin-top: 15px;
+            padding: 10px;
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+        
+        .vulnerable-badge {
+            background: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="vulnerable-badge">VULNERABLE TO SQL INJECTION</div>
+        <h2>Access Portal</h2>
+        <p style="text-align: center; margin-bottom: 20px; color: #666;">Enter your access code</p>
+        
+        <form method="POST" action="login1.php">
+            <div class="form-group">
+                <input type="text" name="access_code" placeholder="Enter access code" required autocomplete="off">
+            </div>
+            <button type="submit">Access System</button>
+        </form>
+        
+        <div class="demo-credentials">
+            <h4>Demo Access Codes:</h4>
+            <p><strong>admin123</strong> - Administrator</p>
+            <p><strong>user456</strong> - Regular User</p>
+            <p><strong>test789</strong> - Tester</p>
+        </div>
+        
+        <div class="sql-hint">
+            <strong>SQL Injection Test:</strong><br>
+            Try: <code>' OR '1'='1' -- </code> (with trailing space)<br>
+	    <strong>Expected result:</strong> Should show ALL 4 users from database
+        </div>
+    </div>
+</body>
+</html>
